@@ -9,10 +9,10 @@ npm install backbone-rpc
 #### Usage
 
 ```js
-const BackBone = require("backbone-rpc/ipc");
+const BackBone = require('backbone-rpc/ipc');
 
 // pass in the ipc socket path
-const eth = new BackBone("/tmp/parity.sock");
+const eth = new BackBone('/tmp/parity.sock');
 
 // call methods
 await eth.blockNumber();
@@ -22,21 +22,22 @@ await eth.blockNumber();
 await eth.end();
 ```
 
-For a list of supported methods see https://wiki.parity.io/JSONRPC-eth-module.html
+For a list of supported methods see
+https://wiki.parity.io/JSONRPC-eth-module.html
 
 If you are using Parity you can also use the pubsub module, to subscribe to
 changes:
 
 ```js
 const unsubscribe = await eth.subscribe(
-	eth.getBlockByNumber("latest", false),
-	function (err, block) {
-		if (err) return;
-		if (parseInt(block.timestamp) > Date.now() - 1000 * 60)
-			return unsubscribe();
+  eth.getBlockByNumber('latest', false),
+  function (err, block) {
+    if (err) return;
+    if (parseInt(block.timestamp) > Date.now() - 1000 * 60)
+      return unsubscribe();
 
-		console.log(block);
-	}
+    console.log(block);
+  }
 );
 ```
 
